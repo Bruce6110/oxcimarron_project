@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{%block title %} Home {% endblock title %}
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{user.username}}
+{% endif %}
+<div class="jumbotron">
+        <h1>Ox Cimarron 2.0</h1>
+        <p class="lead">With CustomUserModel and other changes</p>
+       
+</div>
+{% endblock content %}

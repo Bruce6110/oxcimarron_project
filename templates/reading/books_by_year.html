@@ -1,0 +1,65 @@
+{% extends 'base.html'%} {% load staticfiles %} {% block content%}
+
+<script src="{% static 'columnSort.js' %}"></script>
+<script src="{% static 'search.js' %}"></script>
+<div class="row col-xs-6 mt-4">
+    <div class="col-9">
+        <h3 class="reportTitle">Book List</span>
+        </h3>
+    </div>
+    <div class="col-3">
+        <input class="col-xs-3 mt-4" id="mySearchTerm" type="text" placeholder="Search...">
+    </div>
+</div>
+<div class="container">
+    <table id="myTable" class="table table-bordered table-hover  table-responsive sortable">
+        <thead>
+            <tr>
+                <th>Year Read</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Year Written</th>
+            </tr>
+
+        <tbody class="table table-bordered table-hover  table-responsive">
+            {% for row in rows %}
+
+            <tr>
+                <!--padding-top 6, bottom 1 -->
+                <td>
+                    {{row.0}}
+                </td>
+                <td>
+                    {{row.1}}
+                </td>
+                <td>
+                    {{row.2}}{% if row.3 != "" %}, {{row.3}} {% endif %}
+                </td>
+                <td>
+                    {{row.4}}
+                </td>
+                <td>
+                    {{row.5}}
+                </td>
+                <td>
+                    {{row.6}} 
+                </td>
+            </tr>
+
+
+
+            {% endfor %}
+    </table>
+</div>
+<div id="filterResult" style="margin-top:10px "></div>
+</div>
+<br />
+<br /> Total books: {{rows|length}}
+<br />
+
+
+<pre>{{ report }}</pre>
+<h4>TEST:{{test}}</h4>
+{% endblock %}

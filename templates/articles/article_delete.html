@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h2>Delete</h2>
+<form action="" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    {{form.as_p}}
+    Are you sure you want to delete "{{article.title}}"?</p>
+    <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+    &nbsp;<a class="btn btn-secondary" href="{% url 'article-list' %}">Cancel </a>
+</form>
+
+
+{% endblock content %}

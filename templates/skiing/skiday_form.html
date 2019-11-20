@@ -1,0 +1,43 @@
+{% extends 'base.html'%} {% load staticfiles%} {% load static%}
+
+{% block content%}
+
+<body>
+  <header>
+  </header>
+
+
+  <nav class="navbar  navbar-expand-sm   justify-content-left py-0">
+    <ul class="navbar-nav py-0">
+      <li class="nav-item">
+        <a class="nav-item nav-link" href="{% url 'skiday-list' %}">Ski Day List</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="content-section">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token%}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Ski Day Detail</legend>
+        <table class="formTable">
+          {{form.as_table}}
+        </table>
+        <div class="form-group">
+          {% if perms.reading.change_author%}<br />
+          <button class="btn btn-primary btn-lg" type="submit">Save</button>
+          {%endif%}
+          {% if object.id and perms.reading.delete_author%}
+          <a class="btn btn-warning btn-sm mt-2 mb-2" style="margin-left:7em;"
+            href="{% url 'skiday-delete' object.id %}">Delete this ski day</a>
+          {%endif%}
+        </div>
+
+      </fieldset>
+
+
+    </form>
+  </div>
+
+
+  {%endblock content%}

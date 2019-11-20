@@ -1,0 +1,60 @@
+{% extends 'base.html'%} {% load staticfiles %} {% block content%}
+<script src="{% static 'french.js' %}"></script>
+<link rel="stylesheet" href="/static/french.css">
+<div class="subheader">
+        <div class="row">
+                
+                <div class="col-md-8">
+    <h2><span class="diminished">Grammar Exercises:<br/></span>
+         <span style="padding-left:20px">Attraper et Corriger les Gaffes</span>
+    </h2>
+</div><div class="col-md-4">
+    <div  class="sourceNote">
+           Source:
+        <a  href="https://www.amazon.com/dp/B007XP6DYC?ref_=cm_sw_r_kb_dp_MolsBb8MNH5E3&tag=kpembed-20&linkCode=kpe">
+            <em>Correct Your French Blunders,<br/> by Véronique Mazet</em>
+            <img src="https://images-na.ssl-images-amazon.com/images/I/51JfgZ1Gz-L._SX297_BO1,204,203,200_.jpg" class="right no-print" width="45px">
+        </a>
+    </div></div></div></div>
+<div>
+    {{exercises.all}} {% for exercise in exercises %}
+
+
+    <section class="exerciseblock page-break">
+        <div class="row">
+            <div class="exerciseheader">
+                Exercise {{exercise.letter}}: &nbsp;{{exercise.title}}
+            </div>
+            <div class="col-md-12">
+
+                <p class="section_description">English Version</p>
+                <p class="english">
+                    {{exercise.parts.0}}
+
+
+
+                </p>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 leftcolumn">
+                <p class="section_description">Uncorrected French</p>
+                <p class="uncorrected french">
+                    {{exercise.parts.1}}
+                </p>
+            </div>
+            <div class="col-sm-6 rightcolumn">
+                <p class="section_description">Corrected French</p>
+                <p class="corrected french">
+                    {{exercise.parts.2}}
+                </p>
+
+
+
+            </div>
+        </div>
+    </section>
+
+    {% endfor %} 
+{{debugInfo}}{% endblock %} 

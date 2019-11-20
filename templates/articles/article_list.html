@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Articles{% endblock title %}
+
+{% block content %}
+<ul class="navbar-nav mr-auto mb-4">
+    <li class="nav-item"><a href="{% url 'article-new' %}">+ New Article</a></li>
+</ul>
+
+{% for article in object_list %}
+
+<div class="card">
+    <div class="card-header">
+        <span class="font-weight-bold"><a href="{% url 'article-detail' article.pk %}">{{ article.title }}</a></span>
+        &middot;
+        <span class="text-muted">by {{ article.author }} &nbsp;-&nbsp; {{ article.date }}</span>
+    </div>
+    <div class="card-body container">
+        <div class="row">
+            <div class="col-8">
+                <p>{{ article.body| truncatechars:40 }}
+                    {%if article.body|length < 40  %}
+                    <p>{%lorem 20 w random %}</p>
+                    {%endif%}
+                    <a href="{% url 'article-detail' pk=article.pk %}">Comments: {{ article.comments.count }}</a>
+                    <a href="{% url 'article-edit' article.pk %}">Edit</a> |
+                    <a href="{% url 'article-delete' article.pk %}">Delete</a>
+            </div>
+            <div class="col-4">
+                {%if article.image %}
+                <img src="{{article.image.url}}" style="max-height:80px; max-width:auto" />
+                {%else %}
+                <i>No image</i>
+                {%endif%}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% for comment in article.comments.all %}
+                <p><span class="font-weight-bold">{{ comment.author }} &middot;</span>
+                    {{ comment }}
+                </p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+    {% endblock content %}

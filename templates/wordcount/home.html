@@ -1,0 +1,11 @@
+{% extends 'base.html'%} {% load staticfiles %} {% block content%}
+
+ <h1>Word Count</h1>
+  <form class="" method="POST" action="{% url 'dothecount' %}">
+    {% csrf_token %}
+  
+    Enter text:<br/> <textarea name="entered_text" rows="12" cols="80"></textarea>
+    <br/><input type="submit" name="" value="Count the words"/>
+
+  </form>
+{% endblock %}

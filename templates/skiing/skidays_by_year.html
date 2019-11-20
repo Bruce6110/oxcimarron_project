@@ -1,0 +1,49 @@
+{% extends 'base.html'%} {% load staticfiles %} {% block content%}
+
+<script src="{% static 'columnSort.js' %}"></script>
+<script src="{% static 'search.js' %}"></script>
+<div class="row col-xs-6 mt-4">
+    <div class="col-9">
+        <h3 class="reportTitle">Ski Days by Year</span>
+        </h3>
+    </div>
+</div>
+<div class="container">
+    <table class="table table-bordered table-hover  table-responsive sortable">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Number of Days</th>
+            </tr>
+
+        <tbody id="myTable">
+
+            {% for row in rows %}
+
+            <tr>
+                <!--padding-top 6, bottom 1 -->
+                <td>
+                    {{row.0}}
+                </td>
+                <td>
+                    {{row.1}}
+                </td>
+
+
+
+
+</div>
+
+{% endfor %}
+</tr>
+</table>
+<div id="filterResult" style="margin-top:10px "></div>
+</div>
+
+<h5>Years skied: {{rows|length}}</h5>
+<h5>Total days: {{total}}</h5>
+
+
+<pre>{{ report }}</pre>
+
+{% endblock %}

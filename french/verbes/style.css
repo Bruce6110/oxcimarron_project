@@ -1,0 +1,123 @@
+body {
+  margin: 10px;
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+/*@media screen and (min-width: 0px) {
+*/
+div.container {
+  font-size: 1.2vw;
+  width: 80%;
+
+  /*this allows font to scale according to viewport size*/
+  /**/
+}
+
+table {
+  border: 2px solid #eee;
+}
+
+td,
+th {
+  border-right: 2px solid #eee;
+}
+
+td:hover {
+  background-color: #eff;
+}
+
+
+.large {
+  font-size: 115%;
+}
+
+.extra-large {
+  font-size: 130%;
+}
+
+.participle {
+  font-size: 1.25em;
+  color: #337;
+
+}
+
+ul.singular {
+  width: 43%;
+  float: left;
+  padding-left: 10px;
+  padding-right: 0px;
+
+}
+
+ul.plural {
+  width: 57%;
+  text-indent: 10px;
+  float: right;
+
+  border-left: 1px solid #ececec;
+  padding-left: 10px;
+  border: border-collapse;
+}
+
+
+.highlighted {
+  color: #f04848;
+  font-size: 1.20em;
+}
+
+
+div.tenseHeader {
+  color: #A8F;
+  font-style: italic;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+
+div.inline {
+  padding: 1em 0em;
+  border: 0;
+  display: inline-block;
+}
+
+
+
+
+div.container {
+  border: 5px;
+  border-color: black;
+}
+
+
+
+div.conjugations {
+  color: #338;
+  font-weight: 600;
+  overflow: hidden;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+
+div.conjugations ul {
+  list-style-type: none;
+  padding-left: 0.5em;
+
+}
+
+div.conjugations li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+
+input {
+  margin-left: 0.5em;
+  padding: 0.3em;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fdfaf9;
+  color: #449;
+  font-weight: 600;
+}

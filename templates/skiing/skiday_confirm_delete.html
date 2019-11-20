@@ -1,0 +1,29 @@
+{% extends 'base.html'%} {% load staticfiles%}
+{% block content%}
+
+
+<header>
+
+</header>
+
+
+<div class="content-section" style="margin-top:30px">
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token%}
+        <fieldset class="form-group" >
+
+            {{form}}
+            <h3>Are you sure you want to delete ski day "{{object.date}} - {{object.resort_name}}"?</h3>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-danger" type="submit">Yes, Delete</button>
+            &nbsp;<a class="btn btn-secondary" href="{% url 'author-update' object.id %}">Cancel </a>
+        </div>
+    </form>
+</div>
+
+
+
+
+{%endblock content%}

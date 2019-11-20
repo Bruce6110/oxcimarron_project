@@ -1,0 +1,36 @@
+{% extends 'base.html'%} {% load humanize %} {% load staticfiles %} {% block content%}
+<p style="text-align:center"><a href="{% url 'wordcount' %}">New Count</a><br/></p>
+<section id="summary">
+  <h3>Wordcount Summary</h3>
+
+  <p>Total words: {{total_words|intcomma}}<br/>
+  Unique words: {{unique_word_count|intcomma}}</p>
+  <p>Total characters {{total_chars|intcomma}}
+    <br/>Unique characters: {{unique_char_count|intcomma}} 
+  </p>
+</section>
+
+
+<br/>
+<br/>
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-7" id="wordlist">
+
+      <h4>Word Counts</h4>
+      {% for word, counttotal in sorted_words %} {{word}} - {{counttotal|intcomma}}
+      <br/> {% endfor %}
+
+    </div>
+    <div class="col-md-5" id="charlist">
+    
+      <h4>Character Counts</h4>
+      {% for character, counttotal in sorted_chars %} {{character}} - {{counttotal|intcomma}}
+      <br/> {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

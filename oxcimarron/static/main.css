@@ -1,0 +1,122 @@
+.focus {
+    background-color: rgb(220, 200, 180, 0.3);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.selected {
+    background-color: rgb(220, 210, 190, 0.3);
+    font-weight: bold;
+}
+
+.asc:after {
+    content: "\25B2";
+}
+
+.desc:after {
+    content: "\25BC";
+}
+
+@media print {
+
+    .no-print,
+    .no-print * {
+        display: none !important;
+    }
+}
+
+figcaption {
+    font-size: 60%;
+    text-align: center;
+
+}
+
+.pt-150 {
+    padding-top: 150px;
+}
+
+#copyright {
+    margin-top: 70px;
+}
+
+
+.reportTitle {
+    padding: 20px;
+}
+
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+    background-color: rgba(255, 252, 255);
+}
+
+.small,
+small {
+    font-size: 70%;
+    font-weight: 500;
+}
+
+.nav li {
+    padding-right: 5px;
+
+}
+
+.nav-item {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.table-hover tbody tr:hover th {
+    background-color: rgba(210, 215, 245, 0.3)
+}
+
+#banner {
+    background-color: rgba(215, 215, 225, 0.6);
+    padding: 10px 15px 10px 15px;
+}
+
+blockquote {
+    float: none;
+    width: 90%;
+    margin: 10px auto 10px auto;
+    text-align: center;
+}
+
+input,
+textarea {
+    background-color: #FBFBFF;
+    font-weight: 500;
+
+}
+
+ul.errorlist {
+    color: #CC3333;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.special {
+    /* background-color:orange;*/
+    font-style: italic
+}
+
+body {
+    background-color: purple;
+}
+
+th,
+td {
+    vertical-align: top;
+    padding: 3px;
+
+}
+
+.comment {
+    margin: 20px 0px 20px 20px;
+    color: purple;
+}
+
+label {
+    color: rgba(119, 119, 152, 0.8);
+    size: 1.1em;
+    vertical-align: top;
+}

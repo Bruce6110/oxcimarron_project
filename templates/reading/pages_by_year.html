@@ -1,0 +1,60 @@
+{% extends 'base.html'%}{% load staticfiles %} {% load humanize %} {% block content%}
+<script src="{% static 'columnSort.js' %}"></script>
+
+<div class="container">
+    <h3 class="reportTitle">Page Totals Per Year</h3>
+    <table id="data" class="table table-bordered table-hover  table-striped table-responsive sortable"
+        style="width:80%">
+        <style>
+            td {
+                text-align: right;
+            }
+        </style>
+        <thead>
+            <tr>
+                <th style="padding-left:8px;padding-right:8px">Year</th>
+                <th>Total Pages</th>
+                <th>Pages per Day</th>
+                <th>Number of Books</th>
+                <th>Average Enjoyment</th>
+                <th>Current Year Pace</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+
+            {% for row in rows %} {% if row.5 > 0 %}
+            <tr style="background-color: rgba(200,160,110,0.2);">
+                {% else %}
+            <tr>
+                {% endif %}
+
+                <td style="text-align:center"> {{row.0}} </td>
+                <td> {{row.1|intcomma}} </td>
+                <td> {{row.2}}</td>
+                <td> {{row.3}} </td>
+                <td> {{row.4}} </td>
+                <td style="text-align:center"> {% if row.5 > 0 %}
+                    <em>{{row.5|floatformat|intcomma}} </em>
+                    {% endif %}&nbsp; </td>
+            </tr>
+            {% endfor %}
+
+    </table>
+    <div id="summary">
+        <div class="row">
+            <div class="col-md-2">Years Recorded:</div>
+            <div class="col-md-2" style="text-align:right"> {{rows|length}}</div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2">Total Pages:</div>
+            <div class="col-md-2" style="text-align:right"> {{total|intcomma}}</div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2">Yearly Average:</div>
+            <div class="col-md-2" style="text-align:right"> {{avg|intcomma}}</div>
+            <div class="col-md-8"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

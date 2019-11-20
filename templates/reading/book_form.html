@@ -1,0 +1,34 @@
+{% extends 'base.html'%} {% load staticfiles%}
+{% block content%}
+
+<header>
+
+</header>
+
+<a class="nav-item nav-link mb-4" href="{% url 'book-list' %}"> &vltri; Book List </a>
+
+<div class="content-section">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token%}
+    <fieldset class="form-group mb-1">
+      <legend class="border-bottom mb-3">Book Details</legend>
+
+      <table  class="formTable">
+        {{form.as_table}}
+      </table>
+    </fieldset>
+    <div class="form-group">
+      {% if perms.reading.change_book%}<br />
+      <button class="btn btn-primary btn-lg" type="submit">Save</button>
+      {%endif%}
+      {% if object.id and perms.reading.delete_book%}
+      <a class="btn btn-warning btn-sm mt-2 mb-2" style="margin-left:7em;"
+        href="{% url 'book-delete' object.id %}">Delete this book</a>
+      {%endif%}
+    </div>
+  </form>
+</div>
+
+
+
+{%endblock content%}

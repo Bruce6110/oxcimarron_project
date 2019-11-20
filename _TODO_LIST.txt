@@ -1,0 +1,24 @@
+portfolio_project:
+
+figure out how to show a day count on the Resort list.
+similarly, figure out how to show book count on the Authors list
+figure out how to do averages and aggregates in CBVs
+add security to Skiing app
+
+✔ Add login for certain pages @high @done (7/8/2018, 11:27:31 PM)
+✔ Create a crud app for the books and authors 
+✔ Write up the django cheat sheet @done (6/29/2018, 6:48:59 PM)
+✔ enable remote login to postgresql
+☐ obfuscate the passwords on digocean (note: admin password on dig oc =b__d
+☐ Create system for backing up postgresql db @high 
+☐ fix sorting for files with multiple tables
+☐ Write up business plan for affordable website: put up ads (cards, craigslist, etc.)
+☐ allow redirect from the signup page to the originally desired page
+
+
+
+
+ctrl-shift-p Do:New Task
+alt-c to cancel a task
+alt-d to mark a task complete/incomplete
+

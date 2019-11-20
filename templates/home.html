@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<section class="text-center mt-3">
+  <img width="50%" data-toggle="tooltip" data-placement="left" title="The Crescent Earth and Moon" class="rounded"
+    src="{% static 'earth_and_moon_from_8_million_km.jpg'%}" />
+  <figcaption style="font-size:85%">The crescent earth and moon from 5 million miles</figcaption>
+</section>
+<div class="container">
+  <div class="row align-items-center justify-content-center" style="margin:20px 0px 20px 0px">
+    <div class="col-12">
+      {% if message %}
+      <div class="alert alert-success" style="width:80%">
+        {{ message }}</div>
+
+      {% endif%}
+    </div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col-12 text-center" style="font-size:1.4em;">
+      {{quotes|random}}
+    </div>
+  </div>
+
+</div>
+<div style="margin-top:2em;">
+  <button type="button" class="btn btn-info m-2" data-toggle="collapse" data-target="#bootstrap_demo">Small Bootstrap
+    Demo
+  </button>
+
+</div>
+<div id="bootstrap_demo" class="collapse fade">
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Info!</strong> This alert box could indicate a neutral informative change or action. It's supposed to fade a
+    little as it's closing
+  </div>
+  <div class="container pt-100">
+    <h3>Bootstrap Contextual Backgrounds</h3>
+    <p>Use the contextual background classes to provide "meaning through colors":</p>
+    <p class="bg-primary">bg-primary: This text is important.</p>
+    <p class="bg-success">bg-success: This text indicates success.</p>
+    <p class="bg-info">bg-info: This text represents some information.</p>
+    <p class="bg-warning">bg-warning: This text represents a warning.</p>
+    <p class="bg-danger">bg-danger: This text represents danger.</p>
+  </div>
+
+  <div class="container">
+    <h2>Simple Collapsible</h2>
+    <p>Click on the button to toggle between showing and hiding content.</p>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Simple
+      collapsible</button>
+    <div id="demo" class="collapse">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna
+      aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+  </div>
+  <div class="container text-left pt-50">Hit
+    <kbd>Ctrl-P</kbd> to print
+  </div>
+
+</div>
+<hr /> {% endblock %}

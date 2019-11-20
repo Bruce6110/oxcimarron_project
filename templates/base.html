@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+{% load staticfiles %}
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <link rel="stylesheet" href="/static/main.css">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>
+        Ox Cimarron 2.0b {% if page_title %} - {{ page_title }} {% endif %}
+    </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap compiled JS -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <header>
+        <div class="container-fluid">
+            <div id="banner" class="row align-items-center">
+                <div class="col-md-2">
+
+                    <a data-toggle="tooltip" title="The Three Moroccans" href="{% url 'home' %}" class='navbar-brand'>
+                        <img alt="Three Moroccans" src="{% static 'moroccans_icarus.jpg' %}"
+                            class="img-thumbnail d-inline-block align-top" />
+
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="display-5 text-center">Ox Cimarron 2.0b
+                        <br />
+                        <small>My practice website</small>
+                    </h3>
+                </div>
+                <div class="col-md-6">
+
+                    <nav class="navbar navbar-expand-md navbar-collapse navbar-light justify-content-center py-0">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'home' %}">Home <span
+                                            class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'article-list' %}">Articles</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{% url 'skiday-list' %}"
+                                        id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Skiing
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{% url 'skiday-list' %}">Ski Days</a>
+                                        <a class="dropdown-item" href="{% url 'resort-list' %}">Resorts</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'skidays-by-year' %}">Ski Days by Year</a>
+                                        <a class="dropdown-item" href="{% url 'skidays-by-resort' %}">Ski Days by
+                                            Resort</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{% url 'book-list' %}" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Reading
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{% url 'book-list' %}"> Book List</a> <a
+                                            class="dropdown-item" href="{% url 'author-list' %}">Author List</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'books-by-year' %}">Titles by Year</a>
+                                        <a class="dropdown-item" href="{% url 'pages-by-year' %}">Pages by Year</a>
+                                    </div>
+                                </li>
+
+
+                                <!--dropdown menu for sensor examples, if mobile-->
+
+                                {% if request.user_agent.is_mobile %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                        SensorStuff
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{% url 'compass' %}">Orientation</a>
+                                        <a class="dropdown-item" href="{% url 'gravity' %}">Gravity</a>
+                                        <a class="dropdown-item" href="{% url 'speech_recognition' %}">Speech
+                                            Recognition</a>
+                                        <a class="dropdown-item" href="{% url 'speech_synthesis' %}">Speech
+                                            Synthesis</a>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{% url 'techstuff' %}">Tech Stuff</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{% url 'exercises' %}">French</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{% url 'wordcount' %}">WordCount</a>
+                                </li>
+                                {% if user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link"
+                                        href="javascript:{document.getElementById('logoutForm').submit()}"
+                                        onclick="">Logout <b>
+                                            {%if user.get_short_name%}
+                                            {{user.get_short_name}}
+                                            {%else%}
+                                            {{user.get_username}}
+                                            {%endif%}</b></a>
+                                    <form id="logoutForm" method="POST" action="{% url 'logout' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" />
+                                    </form>
+                                </li>
+                                <!-- to logout you have to do a Post! -->
+
+                                {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                                </li>
+
+                                {% endif %}
+
+
+
+
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main>
+            {% block content %} {% endblock %}
+        </main>
+    </div>
+
+    <footer class="text-muted">
+        {{additionalFooter}}
+    </footer>
+
+
+
+    <br />
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous">
+    </script>
+
+    <hr />
+</body>
+
+
+</html>

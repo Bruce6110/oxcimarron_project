@@ -1,0 +1,79 @@
+{% extends 'base.html'%} {% load staticfiles%}
+{% load humanize %}
+<h2>Ski Days</h2>
+{% block content%}
+<script src="{% static 'columnSort.js' %}">
+</script>
+<style>
+    table {
+        font-size: 0.95em;
+    }
+
+    th {
+        font-size: 0.94em;
+        text-align: center;
+
+    }
+
+    td {
+        text-align: right;
+        white-space: nowrap;
+    }
+</style>
+<script src="{% static 'search.js' %}"></script>
+{% if perms.reading.add_author%}
+<div class="form-group mt-2">
+    <a class="btn btn-light btn-sm " type="submit" href="{% url 'resort-create' %}">Add Resort</a>
+</div>
+{%endif%}
+
+
+<div class="row col-xs-6 mt-4">
+    <div class="col-9">
+        <h3 class="reportTitle">Resorts</h3>
+    </div>
+    <div class="col-3">
+        <input class="col-xs-3 mt-4" id="mySearchTerm" type="text" placeholder="Search...">
+    </div>
+</div>
+<div class="container">
+    <table class="table table-bordered table-hover  table-responsive sortable" id="myTable">
+        <thead>
+            <tr>
+                <th style="text-align:left">Resort</th>
+                <th style="text-align:left">Location</th>
+                <th>Skiable Acres</th>
+                <th>Base Elevation (feet)</th>
+                <th>Vertical Feet</th>
+                <th>Summit Elevation (feet)</th>
+                <th>Longest Run (miles)</th>
+                <th>Personal Rating</th>
+                <th>Seq</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resort in object_list %}
+            <tr>
+                <td style="text-align:left">
+                    <a class="article-title" href="{% url 'resort-update' resort.id %}">
+                        {{resort.resort_name}}
+                    </a>
+                </td>
+                <td style="text-align:left">{{resort.location}}</td>
+                <td>{{resort.skiable_acres|intcomma}}</td>
+                <td>{{resort.base_elevation|intcomma}}</td>
+                <td>{{resort.vertical_feet|intcomma}}</td>
+                <td>{{resort.base_elevation|add:resort.vertical_feet|intcomma}}</td>
+                <td>{{resort.longest_run}}</td>
+                <td>{{resort.personal_rating}}</td>
+                <td>{{resort.id}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div id="filterResult" style="margin-top:10px "></div>
+</div>
+
+</div>
+
+{%endblock%}

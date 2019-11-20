@@ -1,0 +1,76 @@
+{% extends 'base.html'%} {% load staticfiles%} {% block content%}
+
+<header>
+
+</header>
+
+<script src="{% static 'columnSort.js' %}">
+</script>
+<script src="{% static 'search.js' %}"></script>
+{% if perms.reading.add_author%}
+<div class="form-group mt-2">
+  <a class="btn btn-light btn-sm " type="submit" href="{% url 'author-create' %}">New Author</a>
+</div>
+{%endif%}
+
+
+<div class="row col-xs-6 mt-4">
+  <div class="col-9">
+    <h3 class="reportTitle">Author List</h3>
+  </div>
+  <div class="col-3">
+    <input class="col-xs-3 mt-4" id="mySearchTerm" type="text" placeholder="Search...">
+  </div>
+</div>
+<div class="container">
+  <table class="table table-bordered table-hover  table-responsive sortable" id="myTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+
+        <th>Born</th>
+        <th>Died</th>
+        <th>Picture</th>
+        <th>Origin</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for author in object_list %}
+      <tr>
+        <td>
+          <a class="article-title" href="{% url 'author-update' author.id  %}">
+            {% if author.first_name %}
+            {{author.last_name}}, {{author.first_name}}
+            {% else %}
+            {{author.last_name}}
+            {%endif%}
+          </a>
+        </td>
+
+        <td>
+          {% if author.birth_year %} {{author.birth_year}} {% else %} &nbsp; {% endif %}
+        </td>
+        <td> {% if author.death_year %} {{author.death_year}} {% endif %}</td>
+        <td>{% if author.picture %}
+          <img style="height:auto;max-width:50px" src="{{author.picture.url}}" />
+          {%else %}
+          &nbsp; {% endif %}</td>
+        <td>{{author.country_of_origin}}</td>
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div id="filterResult" style="margin-top:10px "></div>
+</div>
+
+</div>
+
+
+
+
+
+{%endblock%}

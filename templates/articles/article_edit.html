@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h2>Edit</h2>
+<form action="" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    {{form.as_p}}
+    <p class='card-text'><img class='card-img-top fluid' src='{{article.image.url}}' alt='Image'
+            style="max-width:50%; height:auto" /></p>
+    <div class="card-footer">
+        {% for comment in article.comments.all %}
+        <p><span class="font-weight-bold">{{ comment.author }} &middot;</span>
+            {{ comment }}
+        </p>
+        {% endfor %}
+    </div>
+    <button class="btn btn-info ml-2" type="submit">Update</button>
+    &nbsp;<a class="btn btn-secondary" href="{% url 'article-list' %}">Cancel </a>
+</form>
+
+
+{% endblock content %}

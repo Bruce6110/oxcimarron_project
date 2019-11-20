@@ -1,0 +1,101 @@
+
+p {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif';
+}
+p.english {
+    font-size: larger;
+    font-weight: 600;
+    font-style: oblique;
+    color: #555555;
+    text-align:justify;
+    padding-bottom:14px;
+    margin-bottom:0px;
+    border-bottom:dashed 2px rgba(128,128,128,0.2);
+}
+p.french{
+    line-height:2.9em;
+    
+    text-align:justify;
+}
+p.uncorrected {    
+    font-size: larger;
+    font-weight: 500;
+    color: rgb(223, 100, 140); 
+    
+   
+}
+p.corrected {
+    color: rgb(41, 41, 206);
+    font-size: larger;
+    font-weight: 700;
+    
+}
+
+p.section_description {
+    margin: 25px 6px 6px 0px;
+    line-height: 1em;
+    color:gray;
+    font-style: oblique;
+    font-size: large;
+    text-decoration: underline;
+    font-weight: 500;
+}
+img.right{
+    display:inline-block;
+    
+    padding: 0 5px;
+    margin: 0 0px;
+   
+   
+    vertical-align: top;
+}
+    
+
+div.container{
+    margin-top:40px
+}
+div.sourceNote{
+   
+    padding:2em 0 0 4.2em; vertical-align:top; text-indent:-3.7em;
+}
+.subheader{
+    background-color:rgba(223, 150, 65, 0.2);
+    padding:15px;
+    border:solid 2px rgba(128,128,128,0.4);
+}
+section.exerciseblock{
+    padding:30px 20px 20px 20px; 
+    border:1px solid  rgba(128,128,128,0.4);
+    /*page-break-after:always;*/
+}
+.page-break{
+    page-break-after:always;  /*doesn't work in Firefox?*/
+    page-break-before:none;
+}
+.page-break:last-child {
+    page-break-after: avoid;
+}
+
+.diminished{
+    font-size:60%; font-weight:300
+}
+div.exerciseheader{
+    background-color:rgba(0,139,139,0.2);
+    color: black;
+    padding:10px;
+    font-weight:700;
+    font-size:1.6em;
+    
+}
+div.leftcolumn{
+    padding-right: 4%;
+    padding-top:0px;
+    margin-top:2px;
+    border-right:dashed 2px rgba(128,128,128,0.2);
+    
+}
+div.rightcolumn{
+    padding-left: 4%;
+    margin-top:2px;
+    padding-top:0px;
+}

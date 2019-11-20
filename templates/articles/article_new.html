@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h2>New article</h2>
+<form method="post" enctype="multipart/form-data">
+    <!--note: the enctype is necessary for file upload-->
+    {%csrf_token%}
+    <table>
+        <tr>
+            <th><label>Author:</label></th>
+            <th>{%if user.get_short_name%}
+                {{user.get_short_name}}
+                {%else%}
+                {{user.get_username}}
+                {%endif%}
+            </th>
+        </tr>
+        {{form}}
+</form>
+</table>
+
+
+<button class="btn btn-info m-2" type="submit">Save</button>
+&nbsp;<a class="btn btn-secondary m-2" href="{% url 'article-list' %}">Cancel </a>
+</form>
+
+
+{% endblock content %}

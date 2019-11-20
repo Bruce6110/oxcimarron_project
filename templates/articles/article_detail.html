@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="article-entry container mt-4">
+    <div class="row m-2 border border-primary p-4">
+        <div class="col-7 mt-3">
+            <h2>{{ object.title }}</h2>
+            <p>by {{object.author}} &nbsp;-&nbsp; {{object.date }}</p>
+            <p>{{object.body}}</p>
+        </div>
+
+        <div class="col-5 mt-5 pt-5">
+            {%if article.image %} <img class='card-img-top fluid' src='{{article.image.url}}' alt='Image'
+                style="max-width:80%; height:auto" />
+            {%else %}
+            <p style="text-align:center"><i>[No image]</i></p>
+            {%endif%}
+        </div>
+
+
+
+    </div>
+
+</div>
+<div class="card-footer">
+
+    <hr />
+    <a class="btn btn-default" href="{% url 'comment-new' pk=article.pk %}">Add comment</a>
+    
+    {% for comment in article.comments.all %}
+
+    <div class="comment">
+        <div class="date">{{ comment.created_date }}</div>
+        <span class="font-weight-bold">{{ comment.author }} &middot;</span>
+        <p>{{ comment | linebreaks }}</p>
+    </div>
+
+    {% empty %}
+    <p>No comments here yet :(</p>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+<p><a href="{% url 'article-edit' article.pk %}">Edit</a> |
+    <a href="{% url 'article-delete' article.pk %}">Delete</a> </p>
+<p>Back to <a href="{% url 'article-list' %}">All Articles</a> </p>
+
+{% endblock content %}

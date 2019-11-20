@@ -1,0 +1,88 @@
+{% extends 'base.html'%} {% load staticfiles%}
+{% load humanize %}
+<h2>Ski Days</h2>
+{% block content%}
+<script src="{% static 'columnSort.js' %}">
+</script>
+<script src="{% static 'search.js' %}"></script>
+{% if perms.reading.add_author%}
+<div class="form-group mt-2">
+  <a class="btn btn-default btn-info " type="submit" href="{% url 'skiday-create' %}"><b>Add
+      Ski
+      Day</b></a>
+</div>
+{%endif%}
+
+
+<div class="row col-xs-6 mt-4">
+  <div class="col-9">
+    <h3 class="reportTitle">Ski Days</h3>
+  </div>
+  <div class="col-3">
+    <input class="col-xs-3 mt-4" id="mySearchTerm" type="text" placeholder="Search...">
+  </div>
+</div>
+<div class="container">
+  <table class="table table-bordered table-hover  table-responsive sortable" id="myTable">
+    <thead>
+      <tr>
+
+        
+        <th>Date</th>
+
+        <th>Resort</th>
+        <th>Location</th>
+        <th>Miles</th>
+        <th>Vertical Feet</th>
+        <th>Top Speed</th>
+        <th>Sequence
+        <th>Trip<br />Number</th>
+        
+
+
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for skiday in object_list %}
+      <tr>
+       
+        <td>
+          <a class="article-title" href="{% url 'skiday-update' skiday.id %}">
+            {{skiday.skidate}}
+          </a>
+        </td>
+
+        <td>
+          <a class="article-title" href="{% url 'resort-update' skiday.resort.id %}">
+            {{skiday.resort.resort_name}}</a>
+        </td>
+        <td>
+          {{skiday.resort.location}}
+        </td>
+        <td> {{skiday.miles|default_if_none:"-"}}</td>
+        <td> {{skiday.vertical_feet|default_if_none:"-"|intcomma}}</td>
+        <td> {{skiday.top_speed|default_if_none:"-"}}</td>
+         <td>
+          
+             {{skiday.id}}
+
+         </td>
+
+        <td>{{skiday.trip_no}}
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div id="filterResult" style="margin-top:10px "></div>
+</div>
+
+</div>
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,55 @@
+{% extends 'base.html'%} {% load staticfiles %} {% block content%}
+
+<script src="{% static 'columnSort.js' %}"></script>
+<script src="{% static 'search.js' %}"></script>
+<div class="row col-xs-6 mt-4">
+    <div class="col-9">
+        <h3 class="reportTitle">Ski Days by Resort</span>
+        </h3>
+    </div>
+    <div class="col-3">
+        <input class="col-xs-3 mt-4" id="mySearchTerm" type="text" placeholder="Search...">
+    </div>
+</div>
+<div class="container">
+    <table class="table table-bordered table-hover  table-responsive">
+        <thead>
+            <tr>
+                <th>Resort</th>
+                <th>Location</th>
+                <th>Number of Days</th>
+            </tr>
+
+        <tbody id="myTable">
+            {% for row in rows %}
+
+            <tr>
+                <!--padding-top 6, bottom 1 -->
+                <td>
+                    <a class="article-title" href="{% url 'resort-update' row.3 %}">
+
+                        {{row.0}}</a>
+                </td>
+                <td>
+                    {{row.1}}
+                </td>
+                <td>
+                    {{row.2}}
+                </td>
+
+
+</div>
+
+{% endfor %}
+</tr>
+</table>
+<div id="filterResult" style="margin-top:10px "></div>
+</div>
+
+<h5>Resorts: {{rows|length}}</h5>
+<h5>Total days: {{total}}</h5>
+
+
+<pre>{{ report }}</pre>
+
+{% endblock %}

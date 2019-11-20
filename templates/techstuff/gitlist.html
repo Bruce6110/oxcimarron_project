@@ -1,0 +1,432 @@
+{% extends 'base.html'%} {% load staticfiles%} {% block content%}
+
+
+<div class="alert alert-primary" style="margin-top:40px">
+  <h2 style="padding:40px 0px 25px 0px">Git Cheatsheet</h2>
+</div>
+<div class="alert alert-success">
+  <dl id="locations">
+    <h3 style="padding:20px 0px 20px 0px">Places Your Source Can Exist</h3>
+    <dt>Stash</dt>
+    <dd>A place to hide modifications while you work on something else</dd>
+    <dt>Workspace</dt>
+    <dd>Local checkout</dd>
+    <dt>Index</dt>
+    <dd>Files you want to commit. Before you "commit" (check in) files, you need to first add them to the index. Also
+      called
+      "current directory cache", "staging area", cache" or "staged files"</dd>
+    <dt>Local Repository</dt>
+    <dd>A subdirectory named <code>.git</code> that contains all of your necessary repository files -- a Git repository
+      skeleton. Typical branches:
+      <code>master</code>,
+      <code>feature-x</code>,
+      <code>bugfix-y</code>
+    </dd>
+    <dt>Upstream Repository</dt>
+    <dd>Versions of your project that are hosted on the Internet or network, ensuring that all your changes are
+      available for
+      other developers. The default name is
+      <code>origin</code>. Typical branches here:
+      <code>master</code>,
+      <code>shared-feature-x</code>,
+      <code>release-y</code>
+    </dd>
+  </dl>
+</div>
+<div class="alert alert-info">
+  <dl id="commands">
+    <h3 style="padding:35px 0px 20px 0px">Common Commands
+
+    </h3>
+    <style>
+      dt {
+        font-size: 120%;
+        margin-top: 20px
+      }
+    </style>
+    <dt>
+      <code>git init</code>
+    </dt>
+    <dd>Initializes the current directory as a new git repository. Creates the hidden .git folder and its various
+      subdirectories
+    </dd>
+    <dt>
+      <code>git status</code>
+    </dt>
+    <dd>Displays paths that have differences between the index file and the current HEAD commit, paths that have
+      differences
+      between the workspace and the index file, and paths in the workspace that are not tracked by git.
+    </dd>
+    <dt>
+      <code>git remote add origin https://github.com/Bruce6110/newspaper.git</code>
+    </dt>
+    <dd>Establishes the specified github path as the remote location of this project. (Note: Github repo must already
+      exist)
+    </dd>
+
+    <dt>
+      <code>git remote set-url origin https://github.com/Bruce6110/newspaper_project.git</code>
+    </dt>
+    <dd>Change the remote url for a project. (Note: Github repo must already
+      exist)
+    </dd>
+
+    <dt>
+      <code>git diff</code>
+    </dt>
+    <dd>Displays the differences not added to the index.</dd>
+    <dt>
+      <code>git diff
+        <em>commit or branch</em>
+      </code>
+    </dt>
+    <dd>View the changes you have in your workspace relative to the named
+      <em>commit</em>. You can use HEAD to compare it with the latest commit, or a branch name to compare with the tip
+      of a different
+      branch
+    </dd>
+    <dt>
+      <code>git add
+        <em>file... or dir...</em>
+      </code>
+    </dt>
+    <dd>Adds the current content of new or modified files to the index, thus staging that content for inclusion in the
+      next commit.
+      Use
+      <code>add --interactive</code> to add the modified contents in the workspace interactively to the index.
+    </dd>
+    <dt>
+      <code>git add -u</code>
+    </dt>
+    <dd>Adds the current content of modified (NOT NEW) files to the index. This is similar to what 'git commit -a' does
+      in preparation
+      for making a commit.
+    </dd>
+    <dt>
+      <code>git rm
+        <em>file(s)...</em>
+      </code>
+    </dt>
+    <dd>Remove a file from the workspace and the index.</dd>
+    <dt>
+      <code>git mv
+        <em>file(s)...</em>
+      </code>
+    </dt>
+    <dd>Move file in the workspace and the index.</dd>
+    <dt>
+      <code>git commit -a
+        <span class="optional">-m 'msg'</span>
+      </code>
+    </dt>
+    <dd>Commit all files changed since your last commit, except untracked files (ie. all files that are already listed
+      in the
+      index). Remove files in the index that have been removed from the workspace.
+    </dd>
+    <dt>
+      <code>git checkout
+        <em>files(s)... or dir</em>
+      </code>
+    </dt>
+    <dd>Updates the file or directory in the workspace. Does NOT switch branches.</dd>
+    <dt>
+      <code>git reset HEAD
+        <em>file(s)...</em>
+      </code>
+    </dt>
+    <dd>Remove the specified files from the next commit. Resets the index but not the working tree (i.e., the changed
+      files are
+      preserved but not marked for commit) and reports what has not been updated.
+    </dd>
+    <dt>
+      <code>git reset --soft HEAD^</code>
+    </dt>
+    <dd>Undo the last commit, leaving changes in the index.</dd>
+    <dt>
+      <code>git reset --hard</code>
+    </dt>
+    <dd>Matches the workspace and index to the local tree. WARNING: Any changes to tracked files in the working tree
+      since commit
+      are lost. Use this if merging has resulted in conflicts and you'd like to start over. Pass ORIG_HEAD to undo the
+      most
+      recent successful merge and any changes after.
+    </dd>
+    <dt>
+      <code>git checkout
+        <em>branch</em>
+      </code>
+    </dt>
+    <dd>Switches branches by updating the index and workspace to reflect the specified branch,
+      <em>branch</em>, and updating HEAD to be
+      <em>branch</em>.
+    </dd>
+    <dt>
+      <code>git checkout -b
+        <em>name of new branch</em>
+      </code>
+    </dt>
+    <dd>Create a branch and switch to it</dd>
+    <dt>
+      <code>git merge
+        <em>commit or branch</em>
+      </code>
+    </dt>
+    <dd>Merge changes from
+      <em>branch name</em> into current branch.
+      <br>Use
+      <code>&#8209;&#8209;no-commit</code>
+      to leave changes uncommitted.
+    </dd>
+    <dt>
+      <code>git rebase
+        <em>upstream</em>
+      </code>
+    </dt>
+    <dd>Reverts all commits since the current branch diverged from
+      <em>upstream</em>, and then re-applies them one-by-one on top of changes from the HEAD of
+      <em>upstream</em>.
+    </dd>
+    <dt>
+      <code>git cherry-pick
+        <em>commit</em>
+      </code>
+    </dt>
+    <dd>Integrate changes in the given commit into the current branch.</dd>
+    <dt>
+      <code>git revert
+        <em>commit</em>
+      </code>
+    </dt>
+    <dd>Reverse commit specified by
+      <em>commit</em> and commit the result. This requires your working tree to be clean (no modifications from the HEAD
+      commit).
+    </dd>
+    <dt>
+      <code>git diff --cached
+        <span class="optional">
+          <em>commit</em>
+        </span>
+      </code>
+    </dt>
+    <dd>View the changes you staged vs the latest commit. Can pass a
+      <em>commit</em> to see changes relative to it.
+    </dd>
+    <dt>
+      <code>git commit
+        <span class="optional">-m 'msg'</span>
+      </code>
+    </dt>
+    <dd>Stores the current contents of the index in a new commit along with a log message from the user describing the
+      changes.
+    </dd>
+    <dt>
+      <code>git commit --amend</code>
+    </dt>
+    <dd>Modify the last commit with the current index changes.</dd>
+    <dt>
+      <code>git log</code>
+    </dt>
+    <dd>Show recent commits, most recent on top. Options:
+      <br>
+      <code>&#8209;&#8209;decorate</code>
+      with branch and tag names on appropriate commits
+      <br>
+      <code>&#8209;&#8209;stat</code> with stats (files changed, insertions, and deletions)
+      <br>
+      <code>&#8209;&#8209;author=
+        <em>author</em>
+      </code>
+      only by a certain author
+      <br>
+      <code>&#8209;&#8209;after="MMM DD YYYY"</code> ex. ("Jun 20 2008") only commits after a certain date
+      <br>
+      <code>&#8209;&#8209;before="MMM DD YYYY"</code>
+      only commits that occur before a certain date
+      <br>
+      <code>&#8209;&#8209;merge</code> only the commits involved in the current merge conflicts
+    </dd>
+    <dt>
+      <code>git diff
+        <em>commit</em>
+        <em>commit</em>
+      </code>
+    </dt>
+    <dd>View the changes between two arbitrary commits</dd>
+    <dt>
+      <code>git branch</code>
+    </dt>
+    <dd>List all existing branches. Option -r causes the remote-tracking branches to be listed, and option -a shows
+      both.
+    </dd>
+    <dt>
+      <code>git branch -d
+        <em>branch</em>
+      </code>
+    </dt>
+    <dd>Delete an specified branch. Use -D to force.</dd>
+    <dt>
+      <code>git branch --track
+        <em>new</em>
+        <em>remote/branch</em>
+      </code>
+    </dt>
+    <dd>Create a new local branch that tracks a remote branch.</dd>
+    <dt>
+      <code>git clone
+        <em>repo</em>
+      </code>
+    </dt>
+    <dd>Download the repository specified by
+      <em>repo</em> and checkout HEAD of the master branch.</dd>
+    <dt>
+      <code>git pull
+        <em>remote</em>
+        <em>refspec</em>
+      </code>
+    </dt>
+    <dd>Incorporates changes from a remote repository into the current branch. In its default mode,
+      <code>git pull</code>
+      is shorthand for
+      <code>git fetch</code> followed by
+      <code>git merge FETCH_HEAD</code>.
+    </dd>
+    <dt>
+      <code>git reset --hard
+        <em>remote</em>/
+        <em>branch</em>
+      </code>
+    </dt>
+    <dd>Reset local repo and working tree to match a remote branch. Use
+      <code>reset &#8209;&#8209;hard origin/master
+      </code> to throw away all commits to the local master branch. Use this to start over on a failed merge.
+    </dd>
+    <dt>
+      <code>git fetch
+        <em>remote</em>
+        <em>refspec</em>
+      </code>
+    </dt>
+    <dd>Download objects and refs from another repository.</dd>
+    <dt>
+      <code>git push</code>
+    </dt>
+    <dd>update the server with your commits across all branches that are *COMMON* between your local copy and the
+      server.Local
+      branches that were never pushed to the server in the first place are not shared
+    </dd>
+    <dt>
+      <code>git push
+        <em>remote</em>
+        <em>branch</em>
+      </code>
+    </dt>
+    <dd>Push new (or existing) branch to remote repository</dd>
+    <dt>
+      <code>git push
+        <em>remote</em>
+        <em>branch</em>:
+        <em>branch</em>
+      </code>
+    </dt>
+    <dd>Push new branch to remote repository with a different name</dd>
+    <dt>
+      <code>git branch -r</code>
+    </dt>
+    <dd>List remote branches</dd>
+    <dt>
+      <code>git push
+        <em>remote</em> :
+        <em>branch</em>
+      </code>
+    </dt>
+    <dd>Remove a remote branch. Literally @quot;push nothing to this branch@quot;</dd>
+    <dt>
+      <code>git clean</code>
+    </dt>
+    <dd>Cleans the working tree by recursively removing files that are not under version control, starting from the
+      current directory.
+    </dd>
+    <dt>
+      <code>git stash save
+        <span class="optional">
+          <em>msg</em>
+        </span>
+      </code>
+    </dt>
+    <dd>Save your local modifications to a new stash, and run git reset &#8209;&#8209;hard to revert them. The
+      <em>msg</em> part is optional and gives the description along with the stashed state. For quickly making a
+      snapshot, you
+      can omit both "save" and
+      <em>msg</em>.
+    </dd>
+    <dt>
+      <code>git stash apply
+        <span class="optional">
+          <em>stash</em>
+        </span>
+      </code>
+    </dt>
+    <dd>Move changes from the specified stash into the workspace. The latest stash is the default.</dd>
+    <dt>
+      <code>git stash pop</code>
+    </dt>
+    <dd>Applies the changes from the last (or specified) stash and then removes the given stash.</dd>
+    <dt>
+      <code>git stash list</code>
+    </dt>
+    <dd>List the stashes that you currently have.</dd>
+    <dt>
+      <code>git stash show
+        <span class="optional">
+          <em>stash</em>
+        </span>
+      </code>
+    </dt>
+    <dd>Show the changes recorded in the stash as a diff between the stashed state and its original parent. When no
+      <em>stash</em>
+      is given, shows the latest one.
+    </dd>
+    <dt>
+      <code>git stash drop
+        <span class="optional">
+          <em>stash</em>
+        </span>
+      </code>
+    </dt>
+    <dd>Remove a single stashed state from the stash list. When no
+      <em>stash</em> is given, it removes the latest one.
+    </dd>
+    <dt>
+      <code>git stash clear</code>
+    </dt>
+    <dd>Remove all the stashed states. Note that those states will then be subject to pruning, and may be impossible to
+      recover.
+    </dd>
+    <dt>
+      <code>git stash branch
+        <em>branchname</em>
+        <span class="optional">
+          <em>stash</em>
+        </span>
+      </code>
+    </dt>
+    <dd>Creates and checks out a new branch named
+      <em>branchname</em> starting from the commit at which the
+      <em>stash</em> was originally created, applies the changes recorded in
+      <em>stash</em> to the new working tree and index.
+      <br>If that succeeds, and
+      <em>stash</em> is a reference of the form stash@{
+      <em>revision</em>}, it then drops the
+      <em>stash</em>. When no
+      <em>stash</em>
+      is given, applies the latest one.
+      <br>This is useful if the branch on which you ran git stash save has changed enough that git stash apply fails due
+      to conflicts.
+      Since the stash is applied on top of the commit that was HEAD at the time git stash was run, it restores the
+      originally
+      stashed state with no conflicts.
+    </dd>
+  </dl>
+</div>
+
+{% endblock %}

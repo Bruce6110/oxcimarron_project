@@ -1,0 +1,23 @@
+<!doctype html>
+
+{% load staticfiles %}
+<title>Compass</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<img src="{% static 'moroccans.jpg' %}" >
+    <!-- cool-->
+<script>
+    
+var element = document.querySelector("img");
+    
+window.addEventListener('deviceorientation', function(e) {
+    a = Math.floor(e.alpha);
+    b = Math.floor(e.beta);
+	g = Math.floor(e.gamma);
+	var transform = 'rotateZ('+Math.round(e.alpha)+'deg) rotateX('+Math.round(e.beta)+'deg) rotateY('+Math.round(e.gamma)+'deg)';
+    element.style.transform = transform;   
+});
+    
+</script>    
+    
