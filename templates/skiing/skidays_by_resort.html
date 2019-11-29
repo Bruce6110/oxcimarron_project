@@ -1,4 +1,5 @@
-{% extends 'base.html'%} {% load staticfiles %} {% block content%}
+{% extends 'base.html'%} {% load staticfiles %} {% load humanize %}{% block content%}
+
 
 <script src="{% static 'columnSort.js' %}"></script>
 <script src="{% static 'search.js' %}"></script>
@@ -12,12 +13,16 @@
     </div>
 </div>
 <div class="container">
-    <table class="table table-bordered table-hover  table-responsive">
+    <table class="table table-bordered table-hover  table-responsive sortable " id="myTable">
         <thead>
             <tr>
                 <th>Resort</th>
                 <th>Location</th>
                 <th>Number of Days</th>
+               <!-- <th style="text-align:center"><span style="font-size:0.7em">Max Recorded</span></br>Vertical</th>
+                 <th style="text-align:center"><span style="font-size:0.7em">Max Recorded</span><br/>Speed</th>
+                 <th style="text-align:center"><span style="font-size:0.7em">Max Recorded</span><br/>Miles</th>
+                 -->
             </tr>
 
         <tbody id="myTable">
@@ -36,13 +41,25 @@
                 <td>
                     {{row.2}}
                 </td>
+               <!-- <td>
+                    {%if row.4 %} {{row.4|intcomma}} {% else %} - {% endif %}
+                </td>
+                <td>
+                    {%if row.5 %} {{row.5|intcomma}} {% else %} - {% endif %}
+                </td>
+                <td>
+                    {%if row.6 %} {{row.6|intcomma}} {% else %} - {% endif %}
+                </td>
+                -->
+                </tr>
 
 
-</div>
+
 
 {% endfor %}
-</tr>
+
 </table>
+</div>
 <div id="filterResult" style="margin-top:10px "></div>
 </div>
 

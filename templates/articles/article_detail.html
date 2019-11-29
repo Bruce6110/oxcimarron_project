@@ -21,13 +21,16 @@
 
 
     </div>
+    <p><a href="{% url 'article-edit' article.pk %}">Edit</a> |
+        <a href="{% url 'article-delete' article.pk %}">Delete</a> </p>
+    <p>Back to <a href="{% url 'article-list' %}">All Articles</a> </p>
 
 </div>
 <div class="card-footer">
 
     <hr />
-    <a class="btn btn-default" href="{% url 'comment-new' pk=article.pk %}">Add comment</a>
-    
+    <!--<a class="btn btn-default" href="{ url 'add-comment' article.pk }">Add comment</a>
+-->
     {% for comment in article.comments.all %}
 
     <div class="comment">
@@ -46,8 +49,5 @@
 
 
 
-<p><a href="{% url 'article-edit' article.pk %}">Edit</a> |
-    <a href="{% url 'article-delete' article.pk %}">Delete</a> </p>
-<p>Back to <a href="{% url 'article-list' %}">All Articles</a> </p>
 
 {% endblock content %}

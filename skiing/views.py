@@ -148,8 +148,8 @@ class ResortCreateView(LoginRequiredMixin, CreateView):
         context["page_title"] = "Add Ski Resort"
         return context
 
-    def get_absolute_url(self):
-        return reverse('resort-update', args=[str(self.id)])
+    #def get_absolute_url(self):
+    #    return reverse('resort-update', args=[str(self.id)])
 
     def form_valid(self, form):
         # do whatever else here:
@@ -177,7 +177,7 @@ def skidays_by_resort(request):
 
     cur = connection.cursor()
 
-    sql = "select resort_Name, location, count(*), resort_id\
+    sql = "select resort_Name, location, count(*),  resort_id, max(a.vertical_feet), max(top_speed), max(miles)\
         from skiing_skiday a \
         left join skiing_resort b on a.resort_id = b.id \
         group by resort_name, location,resort_id  \

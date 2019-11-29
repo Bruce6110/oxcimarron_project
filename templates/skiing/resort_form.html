@@ -21,7 +21,7 @@
             {% if perms.reading.change_book%}<br />
             <button class="btn btn-primary btn-lg" type="submit">Save</button>
             {%endif%}
-            {% if object.id and perms.reading.delete_book%}
+            {% if object.id and perms.skiing.delete_resort%}
             <a class="btn btn-warning btn-sm mt-2 mb-2" style="margin-left:7em;"
               href="{% url 'resort-delete' object.id %}">Delete this resort</a>
             {%endif%}

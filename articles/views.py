@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
+from oxcimarron.utils import Utils
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 
@@ -30,13 +30,19 @@ class ArticleDetailView(DetailView):
     model = Article
     template_name = 'articles/article_detail.html'
 
+
 class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
-    form_class=CommentForm
-    template_name = 'articles/article_detail.html'
+    form_class = CommentForm
+    template_name = 'articles/add_comment.html'
+    #template_name = 'articles/test.html'
     #fields = ['comment','uthor']
     login_url = '/users/login'
-
+    
+    def form_valid(self, form):
+        print("PRINTING CCV props")
+        print(":::", Utils.getAttributeReport(self))
+        return super(CommentCreateView, self).form_valid(form)
 
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article

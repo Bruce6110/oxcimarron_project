@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 #from oxcimarron.utils import Utils
 
 # Create your models here.
@@ -47,6 +48,10 @@ class SkiDay(models.Model):
 
     def __str__(self):
         return str(self.skidate) + " - " + str(self.resort)
+
+    def get_absolute_url(self):
+        return reverse('skiday-update', args=[str(self.id)])
+
 
     class Meta:
         ordering = ['-skidate']
