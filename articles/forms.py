@@ -16,7 +16,7 @@ class ArticleForm(forms.ModelForm):
        #overrides default of TextInput
     
 
-class CommentForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):#by default, django generates a form dynamically but we can specify our own fields as shown
     class Meta:
         model= Comment
         fields = ('author','comment') 

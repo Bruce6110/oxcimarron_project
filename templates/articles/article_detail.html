@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<h4>This is article_detail.html template</h4>
 <div class="article-entry container mt-4">
     <div class="row m-2 border border-primary p-4">
         <div class="col-7 mt-3">
-            <h2>{{ object.title }}</h2>
-            <p>by {{object.author}} &nbsp;-&nbsp; {{object.date }}</p>
-            <p>{{object.body}}</p>
+            <h2>{{ article.title }}</h2>
+            <p>by {{article.author}} &nbsp;-&nbsp; {{article.date }}</p>
+            <p>{{article.body}}</p>
         </div>
 
         <div class="col-5 mt-5 pt-5">
-            {%if article.image %} <img class='card-img-top fluid' src='{{article.image.url}}' alt='Image'
+            {%if article.image %} {{article.image.url}}: <img class='card-img-top fluid' src='{{article.image.url}}' alt='Image'
                 style="max-width:80%; height:auto" />
             {%else %}
             <p style="text-align:center"><i>[No image]</i></p>
@@ -27,12 +27,11 @@
 
 </div>
 <div class="card-footer">
-
     <hr />
     <!--<a class="btn btn-default" href="{ url 'add-comment' article.pk }">Add comment</a>
 -->
     {% for comment in article.comments.all %}
-
+    
     <div class="comment">
         <div class="date">{{ comment.created_date }}</div>
         <span class="font-weight-bold">{{ comment.author }} &middot;</span>
@@ -43,11 +42,6 @@
     <p>No comments here yet :(</p>
     {% endfor %}
 </div>
-
-
-
-
-
 
 
 {% endblock content %}

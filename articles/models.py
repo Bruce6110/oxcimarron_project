@@ -31,7 +31,7 @@ class Comment(models.Model):
     article = models.ForeignKey(Article,
                                 on_delete=models.CASCADE,
                                 related_name='comments',)
-    print("ARTICLE: ", article)
+    
     comment = models.CharField(max_length=140)
     created_date = models.DateTimeField(auto_now_add=True, null=True)
     author = models.CharField(max_length=16, default='Test1', blank=True)
@@ -43,7 +43,10 @@ class Comment(models.Model):
         self.save()
 
     def __str__(self):
-        return self.comment
+         return 'Comment {} by {}'.format(self.comment, self.author)
 
     def get_absolute_url(self):
         return reverse('article-detail', args=[str(self.id)])
+
+    class Meta:
+        ordering =['created_date']

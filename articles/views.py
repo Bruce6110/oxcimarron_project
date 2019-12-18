@@ -5,6 +5,30 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from oxcimarron.utils import Utils
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
+from django.shortcuts import render, get_object_or_404
+import sys, traceback
+
+def fbv_article_detail(request, slug):
+    print("VIEW INITIATED: fbv detail")
+    template_name = 'fbv_article_detail.html'
+    article = get_object_or_404(Article, slug=slug)
+    comments = article.comments.filter(active=True)
+    new_comment = None
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            print("Comment form is valid.")
+
+            # Create comment object but don't save to db
+            new_comment = comment_form.save(commit=False)
+            new_comment.article = article
+        else:
+            comment_form = CommentForm()
+
+        return render(request, template_name, {'article': article, 'comments': comments,
+                                               'new_comment': new_comment,
+                                               'comment_form': comment_form})
 
 
 class ArticleListView(ListView):
@@ -36,13 +60,14 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
     form_class = CommentForm
     template_name = 'articles/add_comment.html'
     #template_name = 'articles/test.html'
-    #fields = ['comment','uthor']
+    #fields = ['comment','author']
     login_url = '/users/login'
-    
+
     def form_valid(self, form):
         print("PRINTING CCV props")
         print(":::", Utils.getAttributeReport(self))
         return super(CommentCreateView, self).form_valid(form)
+
 
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article
@@ -53,7 +78,8 @@ class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         obj = self.get_object()
-        print("AUV test_func")
+        print("AUV test_func: ", str(obj.author) +
+              " vs. "+str(self.request.user))
         return obj.author == self.request.user
 
 
