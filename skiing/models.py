@@ -1,5 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models import Max
+from datetime import datetime
+from datetime import date
+
 #from oxcimarron.utils import Utils
 
 # Create your models here.
@@ -22,6 +26,29 @@ class Resort(models.Model):
         ordering = ['resort_name', 'location']
 
 
+def complex_lookup_on_max_skidate():
+    # Find the maximum value of the rating, and then get the record with that rating. Notice the double underscores in rating__max
+    print("Max date", max_skidate)
+    print("current_date", datetime.now())
+    #print("diff: ",datetime.now()-max_skidate)
+    delta = datetime.now().date()-max_skidate
+    print("DELTA DAYS:",delta.days)
+
+    return SkiDay.objects.get(skidate=max_skidate)
+
+
+def get_trip_no_default():
+    max_skidate = SkiDay.objects.all().aggregate(
+        Max('skidate'))['skidate__max']
+    last_skiday = SkiDay.objects.get(skidate=max_skidate)
+    default_trip_no=last_skiday.trip_no
+    delta = datetime.now().date()-max_skidate
+    if(delta.days>14):
+        default_trip_no+=1
+    
+    return default_trip_no
+
+
 class SkiDay(models.Model):
     resort = models.ForeignKey(Resort,
                                on_delete=models.SET_NULL,
@@ -29,8 +56,10 @@ class SkiDay(models.Model):
                                null=True,
                                related_name='skidays',)
 
-    trip_no = models.IntegerField(blank=True, null=True)
-    skidate = models.DateField(verbose_name="Date")
+    #trip_no = models.IntegerField(blank=True, null=True)
+    trip_no = models.IntegerField(
+        blank=True, null=True, default=get_trip_no_default)
+    skidate = models.DateField(verbose_name="Date", default=datetime.now())
     #resort = models.ForeignKey(Resort, null=True, on_delete=models.SET_NULL)
 
     miles = models.DecimalField(
@@ -51,7 +80,6 @@ class SkiDay(models.Model):
 
     def get_absolute_url(self):
         return reverse('skiday-update', args=[str(self.id)])
-
 
     class Meta:
         ordering = ['-skidate']
