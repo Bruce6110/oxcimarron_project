@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.db.models import Max
 from datetime import datetime
 from datetime import date
@@ -59,7 +60,7 @@ class SkiDay(models.Model):
     #trip_no = models.IntegerField(blank=True, null=True)
     trip_no = models.IntegerField(
         blank=True, null=True, default=get_trip_no_default)
-    skidate = models.DateField(verbose_name="Date", default=datetime.now())
+    skidate = models.DateField(verbose_name="Date", default=timezone.now)
     #resort = models.ForeignKey(Resort, null=True, on_delete=models.SET_NULL)
 
     miles = models.DecimalField(
