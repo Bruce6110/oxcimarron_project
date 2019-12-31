@@ -26,8 +26,8 @@
   <table class="table table-bordered table-hover  table-responsive sortable" id="myTable">
     <thead>
       <tr>
+       
 
-        
         <th>Date</th>
 
         <th>Resort</th>
@@ -35,9 +35,9 @@
         <th>Miles</th>
         <th>Vertical Feet</th>
         <th>Top Speed</th>
-        <th>Sequence
+
         <th>Trip<br />Number</th>
-        
+
 
 
       </tr>
@@ -46,8 +46,9 @@
 
       {% for skiday in object_list %}
       <tr>
-       
+        
         <td>
+
           <a class="article-title" href="{% url 'skiday-update' skiday.id %}">
             {{skiday.skidate}}
           </a>
@@ -63,11 +64,6 @@
         <td> {{skiday.miles|default_if_none:"-"}}</td>
         <td> {{skiday.vertical_feet|default_if_none:"-"|intcomma}}</td>
         <td> {{skiday.top_speed|default_if_none:"-"}}</td>
-         <td>
-          
-             {{skiday.id}}
-
-         </td>
 
         <td>{{skiday.trip_no}}
 
@@ -76,6 +72,7 @@
       {% endfor %}
     </tbody>
   </table>
+  Total ski days: {{object_list|length}}
   <div id="filterResult" style="margin-top:10px "></div>
 </div>
 
