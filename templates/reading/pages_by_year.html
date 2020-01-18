@@ -3,13 +3,13 @@
 
 <div class="container">
     <h3 class="reportTitle">Page Totals Per Year</h3>
-    <table id="data" class="table table-bordered table-hover  table-striped table-responsive sortable"
-        style="width:80%">
-        <style>
-            td {
-                text-align: right;
-            }
-        </style>
+<style>
+    td {
+        text-align: right;
+    }
+</style>
+    <table class="table table-bordered table-hover table-striped table-responsive sortable" id="myTable"      style="width:80%">
+             
         <thead>
             <tr>
                 <th style="padding-left:8px;padding-right:8px">Year</th>
@@ -20,7 +20,7 @@
                 <th>Current Year Pace</th>
             </tr>
         </thead>
-        <tbody id="myTable">
+        <tbody>
 
             {% for row in rows %} {% if row.5 > 0 %}
             <tr style="background-color: rgba(200,160,110,0.2);">
