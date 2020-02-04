@@ -1,0 +1,84 @@
+{% extends 'base.html'%} {% load staticfiles %}
+{% load humanize %}
+{% block content%}
+
+<script src="{% static 'columnSort.js' %}"></script>
+<script src="{% static 'search.js' %}"></script>
+<div class="row col-xs-6 mt-4">
+    <div class="col-9">
+        <h3 class="reportTitle">Ski Stats by Trip</span>
+        </h3>
+    </div>
+</div>
+<div class="container">
+    <table id="myTable" class="table table-bordered table-hover  table-responsive sortable">
+        <thead>
+            <tr>
+                <th>Trip No</th>
+                <th>Ski Days</th>
+                <th>Start Day</th>
+                <th>End Day</th>
+                <th>Total Days in Trip</th>
+                <th>Total Vertical Feet Tracked</th>
+                <th>Average Vertical Feet Tracked</th>
+                <th>Total Miles Tracked</th>
+                <th>Max Speed Tracked</th>
+
+
+            </tr>
+
+        <tbody id="myTable">
+
+            {% for row in rows %}
+
+            <tr>
+                <!--padding-top 6, bottom 1 -->
+                <td>
+                    {{row.0}}
+                </td>
+                <td>
+                    {{row.1}}
+                </td>
+                <td>
+                    {{row.2}}
+                </td>
+                <td>
+                    {{row.3}}
+                </td>
+                <td>
+                    {{row.4}}
+                </td>
+                <td>
+                    {{row.5|intcomma}}
+                </td>
+                <td>
+                    {{row.6|floatformat:0|intcomma}}
+                </td>
+                <td>
+                    {{row.7|floatformat:1|intcomma}}
+                </td>
+                <td>
+                    {{row.8|floatformat:1}}
+                </td>
+
+
+</div>
+
+{% endfor %}
+</tr>
+
+</table>
+Total Ski Days:
+{{totaldays}}
+<br />
+Total Vertical Feet Recorded: {{totalvert}}
+<br />
+Total Miles Recorded:{{totalmiles}}
+<br />
+<div id="filterResult" style="margin-top:10px "></div>
+</div>
+
+
+<pre>{{ report }}</pre>
+
+{% endblock %}

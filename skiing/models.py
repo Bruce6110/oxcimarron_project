@@ -33,20 +33,33 @@ def complex_lookup_on_max_skidate():
     print("current_date", datetime.now())
     #print("diff: ",datetime.now()-max_skidate)
     delta = datetime.now().date()-max_skidate
-    print("DELTA DAYS:",delta.days)
+    print("DELTA DAYS:", delta.days)
 
     return SkiDay.objects.get(skidate=max_skidate)
+
+
+def get_default_resort():
+    # use prior resort unless elapsed days >14
+    max_skidate = SkiDay.objects.all().aggregate(
+        Max('skidate'))['skidate__max']
+    last_skiday = SkiDay.objects.get(skidate=max_skidate)
+    default_resort = last_skiday.resort
+    delta = datetime.now().date()-max_skidate
+    if(delta.days > 14):
+        return 
+
+    return default_resort
 
 
 def get_trip_no_default():
     max_skidate = SkiDay.objects.all().aggregate(
         Max('skidate'))['skidate__max']
     last_skiday = SkiDay.objects.get(skidate=max_skidate)
-    default_trip_no=last_skiday.trip_no
+    default_trip_no = last_skiday.trip_no
     delta = datetime.now().date()-max_skidate
-    if(delta.days>14):
-        default_trip_no+=1
-    
+    if(delta.days > 14):
+        default_trip_no += 1
+
     return default_trip_no
 
 
@@ -55,7 +68,7 @@ class SkiDay(models.Model):
                                on_delete=models.SET_NULL,
                                blank=True,
                                null=True,
-                               related_name='skidays',)
+                               related_name='skidays', default=get_default_resort)
 
     #trip_no = models.IntegerField(blank=True, null=True)
     trip_no = models.IntegerField(

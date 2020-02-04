@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import HomePageView
 from .views import AboutPageView
-from .views import skidays_by_resort, skidays_by_year
+from .views import skidays_by_resort, skidays_by_year, skistats_by_trip
 from .views import SkiDayListView, SkiDayUpdateView, SkiDayCreateView, SkiDayDeleteView, ResortListView,    ResortUpdateView, ResortCreateView, ResortDeleteView
 
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('resort/new/', ResortCreateView.as_view(), name='resort-create'),
     path('skidays-by-resort', skidays_by_resort, name='skidays-by-resort'),
     path('skidays-by-year', skidays_by_year, name='skidays-by-year'),
+    path('skistats-by-trip', skistats_by_trip, name='skistats-by-trip'),
     # Note: The name attrib is what the {% url %} tag needs
 
 

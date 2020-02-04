@@ -31,6 +31,7 @@ class SkiDayListView(ListView):
 class SkiDayDeleteView(LoginRequiredMixin, DeleteView):
     model = SkiDay
     login_url = '/users/login'
+
     def get_context_data(self, *args, **kwargs):
         context = super(SkiDayDeleteView, self).get_context_data(
             *args, **kwargs)
@@ -39,15 +40,17 @@ class SkiDayDeleteView(LoginRequiredMixin, DeleteView):
 
     #redirect_field_name = '/skiing/skiday-list'
     # currently, book list view is the default reading view
-    success_url = '/skiing/skiday-list'  #ie, go to skiday list upon delete
+    success_url = '/skiing/skiday-list'  # ie, go to skiday list upon delete
 
 # Class-based view
 # inherit from Django's CreateView
+
+
 class SkiDayCreateView(LoginRequiredMixin, CreateView):
     login_url = '/users/login'
     #success_url = '/skiing/skiday-list'
     model = SkiDay
-    fields = ['skidate', 'trip_no','resort',  'miles',
+    fields = ['skidate', 'trip_no', 'resort',  'miles',
               'vertical_feet', 'top_speed']
     # overrides default in CreateView
 
@@ -69,7 +72,7 @@ class SkiDayUpdateView(LoginRequiredMixin, UpdateView):
 
     model = SkiDay
     fields = ['skidate',  'trip_no', 'resort',  'miles',
-              'vertical_feet', 'top_speed',]
+              'vertical_feet', 'top_speed', ]
 
     #success_url = '/skiing/skiday-list'
 
@@ -148,7 +151,7 @@ class ResortCreateView(LoginRequiredMixin, CreateView):
         context["page_title"] = "Add Ski Resort"
         return context
 
-    #def get_absolute_url(self):
+    # def get_absolute_url(self):
     #    return reverse('resort-update', args=[str(self.id)])
 
     def form_valid(self, form):
@@ -192,6 +195,29 @@ def skidays_by_resort(request):
     # conn.close()
 
     return render(request, 'skiing/skidays_by_resort.html', {'rows': rows, 'page_title': 'Ski Days By Resort', 'total': total})
+
+
+def skistats_by_trip(request):
+    cur = connection.cursor()
+
+    sql = "select trip_no, count(skidate) skidays,  min(skidate) startday, max(skidate) endday, 1+max(skidate)-min(skidate) daysintrip, sum(vertical_feet) totalvertical, avg(vertical_feet) averagevertical, sum(miles) totalmiles, max(top_speed) maxspeed from skiing_skiday group by trip_no order by trip_no"
+
+    cur.execute(sql)
+    rows = cur.fetchall()
+    totaldays = 0
+    totalvert = 0
+    totalmiles = 0
+    for row in rows:
+        totaldays += row[1]
+        if row[4]:
+            totalvert += row[4]
+        if row[5]:
+            totalmiles += row[5]
+
+    cur.close()
+    # conn.close()
+
+    return render(request, 'skiing/skistats_by_trip.html', {'rows': rows, 'page_title': 'Ski Stats by Trip', 'totaldays': totaldays, 'totalmiles': totalmiles, 'totalvert': totalvert, })
 
 
 def skidays_by_year(request):
