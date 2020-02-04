@@ -209,10 +209,10 @@ def skistats_by_trip(request):
     totalmiles = 0
     for row in rows:
         totaldays += row[1]
-        if row[4]:
-            totalvert += row[4]
         if row[5]:
-            totalmiles += row[5]
+            totalvert += row[5]
+        if row[7]:
+            totalmiles += row[7]
 
     cur.close()
     # conn.close()
