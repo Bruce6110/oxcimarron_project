@@ -19,10 +19,14 @@
                 <th>Resort</th>
                 <th>Location</th>
                 <th>Number of Days</th>
-               <!-- <th style="text-align:center"><span style="font-size:0.7em">Max Recorded</span></br>Vertical</th>
-                 <th style="text-align:center"><span style="font-size:0.7em">Max Recorded</span><br/>Speed</th>
-                 <th style="text-align:center"><span style="font-size:0.7em">Max Recorded</span><br/>Miles</th>
-                 -->
+                <th style="text-align:center"><span style="font-size:0.7em">Total Recorded</span></br>Vertical</th>
+                <th style="text-align:center"><span style="font-size:0.7em">Average Recorded</span></br>Vertical</th>
+                <th style="text-align:center"><span style="font-size:0.7em">Max Recorded</span></br>Vertical</th>
+                <th style="text-align:center"><span style="font-size:0.7em">Total Recorded</span></br>Miles</th>
+
+                <th style="text-align:center"><span style="font-size:0.7em">Max Recorded</span><br />Speed</th>
+
+
             </tr>
 
         <tbody id="myTable">
@@ -31,7 +35,7 @@
             <tr>
                 <!--padding-top 6, bottom 1 -->
                 <td>
-                    <a class="article-title" href="{% url 'resort-update' row.3 %}">
+                    <a class="article-title" href="{% url 'resort-update' row.8 %}">
 
                         {{row.0}}</a>
                 </td>
@@ -41,24 +45,33 @@
                 <td>
                     {{row.2}}
                 </td>
-               <!-- <td>
-                    {%if row.4 %} {{row.4|intcomma}} {% else %} - {% endif %}
+                <td>
+                    {%if row.3 %} {{row.3|intcomma}} {% else %} - {% endif %}
                 </td>
                 <td>
-                    {%if row.5 %} {{row.5|intcomma}} {% else %} - {% endif %}
+                    {%if row.4 %} {{row.4|floatformat:0|intcomma}} {% else %} - {% endif %}
+                </td>
+                <td>
+                    {%if row.5 %} {{row.5|floatformat:0|intcomma}} {% else %} - {% endif %}
                 </td>
                 <td>
                     {%if row.6 %} {{row.6|intcomma}} {% else %} - {% endif %}
                 </td>
-                -->
-                </tr>
+                <td>
+                    {%if row.7 %} {{row.7|intcomma}} {% else %} - {% endif %}
+                </td>
+
+            </tr>
 
 
 
 
-{% endfor %}
 
-</table>
+            {% endfor %}
+
+    </table>
+    resort_Name, location, count(*), sum(a.vertical_feet), max(a.vertical_feet), avg(a.vertical_feet),
+    sum(miles), max(top_speed), resort_id\
 </div>
 <div id="filterResult" style="margin-top:10px "></div>
 </div>

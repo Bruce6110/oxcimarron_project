@@ -180,7 +180,7 @@ def skidays_by_resort(request):
 
     cur = connection.cursor()
 
-    sql = "select resort_Name, location, count(*),  resort_id, max(a.vertical_feet), max(top_speed), max(miles)\
+    sql = "select resort_Name, location, count(*), sum(a.vertical_feet),   avg(a.vertical_feet), max(a.vertical_feet),  sum(miles), max(top_speed), resort_id\
         from skiing_skiday a \
         left join skiing_resort b on a.resort_id = b.id \
         group by resort_name, location,resort_id  \
