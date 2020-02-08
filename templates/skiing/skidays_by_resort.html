@@ -18,7 +18,7 @@
             <tr>
                 <th>Resort</th>
                 <th>Location</th>
-                <th>Number of Days</th>
+                <th style="text-align:center">&nbsp; Number &nbsp;<br />of Days</th>
                 <th style="text-align:center"><span style="font-size:0.7em">Total Recorded</span></br>Vertical</th>
                 <th style="text-align:center"><span style="font-size:0.7em">Average Recorded</span></br>Vertical</th>
                 <th style="text-align:center"><span style="font-size:0.7em">Max Recorded</span></br>Vertical</th>
@@ -70,8 +70,7 @@
             {% endfor %}
 
     </table>
-    resort_Name, location, count(*), sum(a.vertical_feet), max(a.vertical_feet), avg(a.vertical_feet),
-    sum(miles), max(top_speed), resort_id\
+
 </div>
 <div id="filterResult" style="margin-top:10px "></div>
 </div>

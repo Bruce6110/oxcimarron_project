@@ -18,11 +18,11 @@
                 <th>Ski Days</th>
                 <th>Start Day</th>
                 <th>End Day</th>
-                <th>Total Days in Trip</th>
-                <th>Total Vertical Feet Tracked</th>
-                <th>Average Vertical Feet Tracked</th>
-                <th>Total Miles Tracked</th>
-                <th>Max Speed Tracked</th>
+                <th>Total Days<br/>in Trip</th>
+                <th>Total<br />Vertical Feet Tracked</th>
+                <th>Average<br />Vertical Feet<br />Tracked</th>
+                <th>Total<br />Miles<br />Tracked</th>
+                <th>Max Speed<br />Tracked</th>
 
 
             </tr>
@@ -49,7 +49,7 @@
                     {{row.4}}
                 </td>
                 <td>
-                    {{row.5|intcomma}}
+                    {{row.5|floatformat:0|intcomma}}
                 </td>
                 <td>
                     {{row.6|floatformat:0|intcomma}}
