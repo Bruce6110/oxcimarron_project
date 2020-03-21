@@ -207,17 +207,24 @@ def skistats_by_trip(request):
     totaldays = 0
     totalvert = 0
     totalmiles = 0
+
+    trackeddays = 0
     for row in rows:
+
         totaldays += row[1]
         if row[5]:
             totalvert += row[5]
+            trackeddays += 1
         if row[7]:
             totalmiles += row[7]
+
+    avgvert = totalvert/trackeddays
+    projgrandtotal = avgvert*totaldays
 
     cur.close()
     # conn.close()
 
-    return render(request, 'skiing/skistats_by_trip.html', {'rows': rows, 'page_title': 'Ski Stats by Trip', 'totaldays': totaldays, 'totalmiles': totalmiles, 'totalvert': totalvert, })
+    return render(request, 'skiing/skistats_by_trip.html', {'rows': rows, 'page_title': 'Ski Stats by Trip', 'totaldays': totaldays, 'totalmiles': totalmiles, 'totalvert': totalvert, 'trackeddays': trackeddays,'avgvert':avgvert,'projgrandtotal':projgrandtotal })
 
 
 def skidays_by_year(request):

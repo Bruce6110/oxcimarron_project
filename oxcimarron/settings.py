@@ -84,8 +84,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'oxcimarron.wsgi.application'
 
 
-
-
 AUTH_USER_MODEL = 'users.CustomUser'  # new
 
 # Password validation
@@ -146,10 +144,29 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+ENVIRONMENT = 'development'
+
+
+# Additional settings for PRODUCTION environment
+# TODO: Insert a mechanism for dynamically determining PROD/DEV environment
+if ENVIRONMENT == 'production':
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+    DEBUG = False
+    ALLOWED_HOSTS = []  # enter digitalocean or heroku info here
+    SECURE_SSL_REDIRECT = True  # ? already handled in prod some other way?
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
+
 
 # print(traceback.extract_stack())
 try:
     from .local_settings import *
     print("Imported Local Settings")
+
 except ImportError:
     print("No Local Settings Found")
