@@ -1,5 +1,5 @@
 {% extends 'base.html'%} {% load staticfiles %} {% block content%}
-
+{% load humanize %}
 <script src="{% static 'columnSort.js' %}"></script>
 <script src="{% static 'search.js' %}"></script>
 <div class="row col-xs-6 mt-4">
@@ -9,14 +9,23 @@
     </div>
 </div>
 <div class="container">
-    <table class="table table-bordered table-hover  table-responsive sortable">
+    <table id="myTable" class="table table-bordered table-hover sortable">
+
         <thead>
             <tr>
                 <th>Year</th>
-                <th>Number of Days</th>
-            </tr>
+                <th>Ski Days</th>
+                <th>Resorts</th>
+                <th>Total<br />Vertical Feet Tracked</th>
+                <th>Average<br />Vertical Feet<br />Tracked</th>
+                <th>Total<br />Miles<br />Tracked</th>
+                <th>Max Speed<br />Tracked</th>
 
-        <tbody id="myTable">
+
+            </tr>
+        </thead>
+
+        <tbody>
 
             {% for row in rows %}
 
@@ -28,16 +37,28 @@
                 <td>
                     {{row.1}}
                 </td>
+                <td>
+                    {{row.2}}
+                </td>
+                <td>
+                    {{row.3|floatformat:0|intcomma}}
+                </td>
+                <td>
+                    {{row.4|floatformat:0|intcomma}}
+                </td>
+                <td>
+                    {{row.5|floatformat:1|intcomma}}
+                </td>
+                <td>
+                    {{row.6|floatformat:1|intcomma}}
+                </td>
 
+            </tr>
+            {% endfor %}
+        </tbody>
 
-
-
-</div>
-
-{% endfor %}
-</tr>
-</table>
-<div id="filterResult" style="margin-top:10px "></div>
+    </table>
+    <div id="filterResult" style="margin-top:10px "></div>
 </div>
 
 <h5>Years skied: {{rows|length}}</h5>

@@ -9,7 +9,7 @@ add security to Skiing app
 ✔ Create a crud app for the books and authors 
 ✔ Write up the django cheat sheet @done (6/29/2018, 6:48:59 PM)
 ✔ enable remote login to postgresql
-☐ obfuscate the passwords on digocean (note: admin password on dig oc =b__d
+☐ obfuscate the passwords on digocean (note: admin password on dig oc =b__d    (b61).  [or b__o (bhc)]
 ☐ Create system for backing up postgresql db @high 
 ☐ fix sorting for files with multiple tables
 ☐ Write up business plan for affordable website: put up ads (cards, craigslist, etc.)

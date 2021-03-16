@@ -16,21 +16,19 @@
             <tr>
                 <th>Trip No</th>
                 <th>Ski Days</th>
+                <th>Resorts</th>
+                <th>Total Days<br />in the Mountains</th>
                 <th>Start Day</th>
                 <th>End Day</th>
-                <th>Total Days<br />in Trip</th>
                 <th>Total<br />Vertical Feet Tracked</th>
                 <th>Average<br />Vertical Feet<br />Tracked</th>
                 <th>Total<br />Miles<br />Tracked</th>
                 <th>Max Speed<br />Tracked</th>
 
-
             </tr>
-
-        <tbody id="myTable">
-
+        </thead>
+        <tbody>
             {% for row in rows %}
-
             <tr>
                 <!--padding-top 6, bottom 1 -->
                 <td>
@@ -43,42 +41,45 @@
                     {{row.2}}
                 </td>
                 <td>
+                    {{row.5}}
+                </td>
+                <td>
                     {{row.3}}
                 </td>
                 <td>
                     {{row.4}}
                 </td>
                 <td>
-                    {{row.5|floatformat:0|intcomma}}
-                </td>
-                <td>
                     {{row.6|floatformat:0|intcomma}}
                 </td>
                 <td>
-                    {{row.7|floatformat:1|intcomma}}
+                    {{row.7|floatformat:0|intcomma}}
                 </td>
                 <td>
-                    {{row.8|floatformat:1}}
+                    {{row.8|floatformat:1|intcomma}}
+                </td>
+                <td>
+                    {{row.9|floatformat:1}}
                 </td>
 
 
-</div>
 
-{% endfor %}
-</tr>
 
-</table>
-Total Ski Days: &nbsp; {{totaldays}}
-<br />
-Total Vertical Feet Recorded: &nbsp; {{totalvert|intcomma}}
-<br />
-Total Miles Recorded: &nbsp; {{totalmiles|intcomma}}
-<br />
-Total Recorded Days: &nbsp;{{trackeddays}}
-<br />Average Vertical Feet Recorded {{avgvert|floatformat:0|intcomma}}
-<br />
-Projected Grand Total Vertical Feet{{projgrandtotal|floatformat:0|intcomma}}
-<div id="filterResult" style="margin-top:10px "></div>
+                {% endfor %}
+            </tr>
+
+    </table>
+    Total Ski Days: &nbsp; {{totaldays}}
+    <br />
+    Total Vertical Feet Recorded: &nbsp; {{totalvert|intcomma}}
+    <br />
+    Total Miles Recorded: &nbsp; {{totalmiles|intcomma}}
+    <br />
+    Total Recorded Days: &nbsp;{{trackeddays}}
+    <br />Average Vertical Feet Recorded {{avgvert|floatformat:0|intcomma}}
+    <br />
+    Projected Grand Total Vertical Feet{{projgrandtotal|floatformat:0|intcomma}}
+    <div id="filterResult" style="margin-top:10px "></div>
 </div>
 
 

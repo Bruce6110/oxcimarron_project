@@ -52,6 +52,7 @@ def get_default_resort():
 
 
 def get_trip_no_default():
+    # use prior trip no unless elapsed days >14
     max_skidate = SkiDay.objects.all().aggregate(
         Max('skidate'))['skidate__max']
     last_skiday = SkiDay.objects.get(skidate=max_skidate)

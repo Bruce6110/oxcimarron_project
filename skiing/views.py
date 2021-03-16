@@ -200,7 +200,7 @@ def skidays_by_resort(request):
 def skistats_by_trip(request):
     cur = connection.cursor()
 
-    sql = "select trip_no, count(skidate) skidays,  min(skidate) startday, max(skidate) endday, 1+max(skidate)-min(skidate) daysintrip, sum(vertical_feet) totalvertical, avg(vertical_feet) averagevertical, sum(miles) totalmiles, max(top_speed) maxspeed from skiing_skiday group by trip_no order by trip_no"
+    sql = "select trip_no, count(skidate) skidays,  count(distinct resort_id) resorts, min(skidate) startday, max(skidate) endday, 1+max(skidate)-min(skidate) daysintrip, sum(vertical_feet) totalvertical, avg(vertical_feet) averagevertical, sum(miles) totalmiles, max(top_speed) maxspeed from skiing_skiday group by trip_no order by trip_no desc"
 
     cur.execute(sql)
     rows = cur.fetchall()
@@ -224,17 +224,16 @@ def skistats_by_trip(request):
     cur.close()
     # conn.close()
 
-    return render(request, 'skiing/skistats_by_trip.html', {'rows': rows, 'page_title': 'Ski Stats by Trip', 'totaldays': totaldays, 'totalmiles': totalmiles, 'totalvert': totalvert, 'trackeddays': trackeddays,'avgvert':avgvert,'projgrandtotal':projgrandtotal })
+    return render(request, 'skiing/skistats_by_trip.html', {'rows': rows, 'page_title': 'Ski Stats by Trip', 'totaldays': totaldays, 'totalmiles': totalmiles, 'totalvert': totalvert, 'trackeddays': trackeddays, 'avgvert': avgvert, 'projgrandtotal': projgrandtotal})
 
 
 def skidays_by_year(request):
 
     cur = connection.cursor()
 
-    sql = "select cast(extract(year from skidate) as INTEGER), count(*)\
-                from skiing_skiday a      \
-               group by extract(year from skidate) \
-    order by 2 desc, 1"
+    sql = "select cast(extract(year from skidate) as INTEGER), count(skidate),\
+    count(distinct resort_id) resorts, sum(vertical_feet) totalvertical, avg(vertical_feet) averagevertical, sum(miles) totalmiles, max(top_speed) maxspeed from skiing_skiday group by cast(extract(year from skidate) as INTEGER)  \
+    order by 1 desc"
     cur.execute(sql)
     rows = cur.fetchall()
     total = 0
