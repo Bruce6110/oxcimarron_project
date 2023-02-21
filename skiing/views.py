@@ -1,3 +1,5 @@
+import sys
+import os
 from django.shortcuts import render
 from django.db.models import Sum
 from django.views.generic import TemplateView
@@ -207,25 +209,31 @@ def skistats_by_trip(request):
     totaldays = 0
     totalvert = 0
     totalmiles = 0
-
     trackeddays = 0
+    
     for row in rows:
-
+        
         totaldays += row[1]
-        if row[5]:
-            totalvert += row[5]
-            trackeddays += 1
-        if row[7]:
-            totalmiles += row[7]
-
+        if row[6]:
+            totalvert += row[6]
+            trackeddays += row[6]/row[7]
+           
+        if row[8]:
+            totalmiles += row[8]
+            
     avgvert = totalvert/trackeddays
-    projgrandtotal = avgvert*totaldays
-
+    avgmiles=totalmiles/trackeddays
+    untrackeddays=totaldays-trackeddays
+    estgrandtotalvert = totalvert+(totaldays-trackeddays)*24000
+    estgrandtotalmiles = totalmiles+(totaldays-trackeddays)*26
+    
+    estavgvert=estgrandtotalvert/totaldays
+    estavgmiles=estgrandtotalmiles/totaldays
+    
     cur.close()
     # conn.close()
 
-    return render(request, 'skiing/skistats_by_trip.html', {'rows': rows, 'page_title': 'Ski Stats by Trip', 'totaldays': totaldays, 'totalmiles': totalmiles, 'totalvert': totalvert, 'trackeddays': trackeddays, 'avgvert': avgvert, 'projgrandtotal': projgrandtotal})
-
+    return render(request, 'skiing/skistats_by_trip.html', {'rows': rows, 'page_title': 'Ski Stats by Trip', 'totaldays': totaldays, 'totalmiles': totalmiles, 'totalvert': totalvert, 'trackeddays': trackeddays, 'avgvert': avgvert, 'avgmiles':avgmiles, 'estgrandtotalvert': estgrandtotalvert, 'estgrandtotalmiles': estgrandtotalmiles,'estavgvert':estavgvert,'estavgmiles': estavgmiles,'untrackeddays':untrackeddays})
 
 def skidays_by_year(request):
 

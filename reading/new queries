@@ -1,0 +1,7 @@
+
+page count by author
+
+select rb.author_id, last_name, first_name, count(rb.id),  sum(standard_pages) 
+from reading_book rb left join reading_author ra 
+on rb.author_id=ra.id group by rb.author_id, last_name, first_name
+order by 5 desc

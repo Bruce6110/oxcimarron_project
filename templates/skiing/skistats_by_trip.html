@@ -14,6 +14,7 @@
     <table id="myTable" class="table table-bordered table-hover  table-responsive sortable">
         <thead>
             <tr>
+                
                 <th>Trip No</th>
                 <th>Ski Days</th>
                 <th>Resorts</th>
@@ -31,6 +32,7 @@
             {% for row in rows %}
             <tr>
                 <!--padding-top 6, bottom 1 -->
+                
                 <td>
                     {{row.0}}
                 </td>
@@ -71,14 +73,25 @@
     </table>
     Total Ski Days: &nbsp; {{totaldays}}
     <br />
-    Total Vertical Feet Recorded: &nbsp; {{totalvert|intcomma}}
+    <br />
+    Days with Vertical Feet Recorded: &nbsp; {{trackeddays|floatformat:0|intcomma}}
+    <br />
+    Total Vertical Feet Recorded: &nbsp; {{totalvert|floatformat:0|intcomma}}
+    <br />
+    Average Vertical Feet Recorded: {{avgvert|floatformat:0|intcomma}}
     <br />
     Total Miles Recorded: &nbsp; {{totalmiles|intcomma}}
     <br />
-    Total Recorded Days: &nbsp;{{trackeddays}}
-    <br />Average Vertical Feet Recorded {{avgvert|floatformat:0|intcomma}}
+    Average Miles Recorded: {{avgmiles|floatformat:1|intcomma}}
     <br />
-    Projected Grand Total Vertical Feet{{projgrandtotal|floatformat:0|intcomma}}
+    <br />
+    <u>Estimated Totals for All {{totaldays}} Days*</u><br />Estimated Vertical Feet:
+    {{estgrandtotalvert|floatformat:0|intcomma}}
+    <br />Estimated Average Vertical Feet: {{estavgvert|floatformat:0|intcomma}}
+    <br />
+    Estimated Miles: {{estgrandtotalmiles|floatformat:1|intcomma}}
+    <br />Estimated Average Miles: {{estavgmiles|floatformat:1|intcomma}}
+    <br/><br/><i>* For each of the {{untrackeddays|floatformat:0}} days with unrecorded vertical, these estimates are using 24,000 feet as the vertical and 26.0 as the mileage.</i>
     <div id="filterResult" style="margin-top:10px "></div>
 </div>
 

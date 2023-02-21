@@ -26,18 +26,6 @@ class Resort(models.Model):
     class Meta:
         ordering = ['resort_name', 'location']
 
-
-def complex_lookup_on_max_skidate():
-    # Find the maximum value of the rating, and then get the record with that rating. Notice the double underscores in rating__max
-    print("Max date", max_skidate)
-    print("current_date", datetime.now())
-    #print("diff: ",datetime.now()-max_skidate)
-    delta = datetime.now().date()-max_skidate
-    print("DELTA DAYS:", delta.days)
-
-    return SkiDay.objects.get(skidate=max_skidate)
-
-
 def get_default_resort():
     # use prior resort unless elapsed days >14
     max_skidate = SkiDay.objects.all().aggregate(
